@@ -1,0 +1,100 @@
+/* General */
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: hsl(193, 100%, 96%);
+    color: hsl(192, 100%, 9%);
+}
+
+h1, h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+}
+
+.logo {
+    width: 150px;
+}
+
+.cta-button {
+    background-color: hsl(322, 100%, 66%);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 50px;
+}
+
+.hero-text {
+    max-width: 600px;
+}
+
+.hero-image {
+    width: 100%;
+}
+
+/* Features Section */
+.features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 50px;
+}
+
+.feature img {
+    width: 100%;
+}
+
+.feature {
+    text-align: center;
+}
+
+/* Call-to-Action Section */
+.cta {
+    text-align: center;
+    padding: 50px;
+    background-color: white;
+}
+
+/* Footer */
+.footer {
+    background-color: hsl(192, 100%, 9%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}

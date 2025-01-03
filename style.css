@@ -174,3 +174,31 @@ a {
         margin-top: 15px; /* Button in header centers in mobile */
     }
 }
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: hsl(322, 100%, 66%);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    display: none; /* Initially hidden */
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.scroll-to-top-btn:hover {
+    background-color: hsl(322, 100%, 55%);
+}
+
+/* Sticky header */
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

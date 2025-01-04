@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Huddle Chat Room</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: hsl(322, 100%, 66%);
+            --neutral-pale-cyan: hsl(193, 100%, 96%);
+            --neutral-dark-cyan: hsl(192, 100%, 9%);
+            --neutral-grayish-blue: hsl(208, 11%, 55%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            color: var(--neutral-dark-cyan);
+            background-color: var(--neutral-pale-cyan);
+            background-image: url("bg-hero-desktop.svg"); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-container h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .login-container form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            padding: 15px;
+            border: 1px solid var(--neutral-grayish-blue);
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .login-container button {
+            padding: 15px;
+            background-color: var(--primary-pink);
+            color: white;
+            font-weight: 700;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: hsl(322, 100%, 56%);
+        }
+
+        .login-container a {
+            display: block;
+            margin-top: 10px;
+            color: var(--primary-pink);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>Login to Huddle</h1>
+        <form action="chatroom.html" method="post">
+            <input type="text" placeholder="Username" name="username" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <a href="#">Forgot your password?</a>
+    </div>
+</body>
+
+</html>

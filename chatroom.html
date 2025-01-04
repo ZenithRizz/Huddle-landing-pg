@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huddle Chat Room</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neutral-dark-cyan: hsl(192, 100%, 9%);
+            --neutral-pale-cyan: hsl(193, 100%, 96%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--neutral-dark-cyan);
+            background-color: var(--neutral-pale-cyan);
+            background-image: url("bg-hero-desktop.svg"); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .chatroom-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .chatroom-container h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .chatroom-container p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chatroom-container">
+        <h1>Welcome to the Huddle Chat Room!</h1>
+        <p>This is where the magic happens! Start connecting with your community now.</p>
+    </div>
+</body>
+
+</html>

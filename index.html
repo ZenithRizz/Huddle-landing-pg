@@ -1,79 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Huddle Landing Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --primary-pink: hsl(322, 100%, 66%);
+            --neutral-pale-cyan: hsl(193, 100%, 96%);
+            --neutral-dark-cyan: hsl(192, 100%, 9%);
+            --neutral-grayish-blue: hsl(208, 11%, 55%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 18px;
+            color: var(--neutral-dark-cyan);
+            background-color: var(--neutral-pale-cyan);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--neutral-dark-cyan);
+        }
+
+        header p {
+            font-size: 1rem;
+            color: var(--neutral-grayish-blue);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .cta {
+            margin-top: 20px;
+        }
+
+        .cta a {
+            display: inline-block;
+            text-decoration: none;
+            background-color: var(--primary-pink);
+            color: white;
+            font-weight: 700;
+            padding: 15px 30px;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta a:hover {
+            background-color: hsl(322, 100%, 56%);
+        }
+
+        main {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+        }
+
+        .section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--neutral-dark-cyan);
+        }
+
+        .section p {
+            font-size: 1rem;
+            color: var(--neutral-grayish-blue);
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: var(--neutral-grayish-blue);
+        }
+
+        footer a {
+            color: var(--primary-pink);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+
 <body>
-
-    <!-- Scroll to top button -->
-    <button id="scrollToTopBtn" class="scroll-to-top-btn">↑</button>
-
-    <!-- Header -->
-    <header class="header" id="header">
-        <img src="logo.svg" alt="Huddle Logo" class="logo">
-        <button class="cta-button">Try It Free</button>
+    <header>
+        <h1>Build The Community Your Fans Will Love</h1>
+        <p>Huddle re-imagines the way we build communities. You have a voice, but so does your audience. Create connections with your users as you engage in genuine discussion.</p>
+        <div class="cta">
+            <a href="#">Get Started For Free</a>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Build The Community Your Fans Will Love</h1>
-            <p>Huddle re-imagines the way we build communities. You have a voice, but so does your audience.</p>
-            <button class="cta-button" id="cta-btn">Get Started For Free</button>
-        </div>
-        <img src="bg-hero-desktop.svg" alt="Hero Image" class="hero-image">
-    </section>
-
-    <!-- Features Section -->
-    <section class="features">
-        <div class="feature" id="feature-1">
-            <img src="illustration-grow-together.svg" alt="Grow Together">
+    <main>
+        <section class="section">
             <h2>Grow Together</h2>
-            <p>Generate meaningful discussions with your audience and build a strong, loyal community.</p>
-        </div>
-        <div class="feature" id="feature-2">
-            <img src="illustration-flowing-conversation.svg" alt="Flowing Conversations">
+            <p>Generate meaningful discussions with your audience and build a strong, loyal community. Think of the insightful conversations you miss out on with a feedback form.</p>
+        </section>
+
+        <section class="section">
             <h2>Flowing Conversations</h2>
-            <p>Our threads have just-in-time loading for a more natural flow.</p>
-        </div>
-        <div class="feature" id="feature-3">
-            <img src="illustration-your-users.svg" alt="Your Users">
+            <p>You wouldn't paginate a conversation in real life, so why do it online? Our threads have just-in-time loading for a more natural flow.</p>
+        </section>
+
+        <section class="section">
             <h2>Your Users</h2>
-            <p>Integrate Huddle with your app’s authentication solution to start chatting immediately.</p>
-        </div>
-    </section>
+            <p>It takes no time at all to integrate Huddle with your app's authentication solution. This means, once signed in to your app, your users can start chatting immediately.</p>
+        </section>
+    </main>
 
-    <!-- Call-to-Action Section -->
-    <section class="cta">
-        <h2>Ready To Build Your Community?</h2>
-        <button class="cta-button">Get Started For Free</button>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="contact">
-            <p>Huddle</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <p>+1-543-123-4567</p>
-            <p>example@huddle.com</p>
-        </div>
-        <div class="links">
-            <a href="#">About Us</a>
-            <a href="#">What We Do</a>
-            <a href="#">FAQ</a>
-            <a href="#">Career</a>
-            <a href="#">Blog</a>
-            <a href="#">Contact Us</a>
-        </div>
-        <div class="social-media">
-            <!-- Add social media icons here -->
-        </div>
+    <footer>
+        <p>&copy; 2024 Huddle. All rights reserved. <a href="#">Privacy Policy</a></p>
     </footer>
-
-    <script src="scripts.js"></script>
 </body>
+
 </html>

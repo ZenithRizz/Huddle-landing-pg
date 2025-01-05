@@ -1,50 +1,58 @@
 // Sticky header function
-window.onscroll = function() { 
-    stickyHeader();
-    scrollFunction();
+window.onscroll = function () {
+    handleStickyHeader();
+    handleScrollToTopButton();
+    revealOnScroll();
 };
 
+// Sticky header functionality
 const header = document.getElementById("header");
-const sticky = header.offsetTop;
+const stickyOffset = header ? header.offsetTop : 0;
 
-function stickyHeader() {
-    if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-    } else {
-        header.classList.remove("sticky");
+function handleStickyHeader() {
+    if (header) {
+        if (window.pageYOffset > stickyOffset) {
+            header.classList.add("sticky");
+        } else {
+            header.classList.remove("sticky");
+        }
     }
 }
 
-// Scroll-to-top button
+// Scroll-to-top button functionality
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
-function scrollFunction() {
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        scrollToTopBtn.style.display = "block";
-    } else {
-        scrollToTopBtn.style.display = "none";
+function handleScrollToTopButton() {
+    if (scrollToTopBtn) {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            scrollToTopBtn.style.display = "block";
+        } else {
+            scrollToTopBtn.style.display = "none";
+        }
     }
 }
 
-scrollToTopBtn.addEventListener("click", function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+if (scrollToTopBtn) {
+    scrollToTopBtn.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
 
 // Smooth scroll for anchor links
 const links = document.querySelectorAll("a[href^='#']");
 links.forEach(link => {
-    link.addEventListener("click", function(e) {
+    link.addEventListener("click", function (e) {
         e.preventDefault();
         const targetId = link.getAttribute("href").substring(1);
-        const target = document.getElementById(targetId);
+        const targetElement = document.getElementById(targetId);
 
-        if (target) {
-            target.scrollIntoView({ behavior: "smooth" });
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: "smooth" });
         }
     });
 });
 
-// Content reveal on scroll
+// Content reveal on scroll functionality
 const features = document.querySelectorAll('.feature');
 
 function revealOnScroll() {
@@ -60,44 +68,56 @@ function revealOnScroll() {
     });
 }
 
-window.addEventListener('scroll', revealOnScroll);
-
 // Button hover effect (Dynamic)
 const ctaButton = document.getElementById("cta-btn");
 
-ctaButton.addEventListener("mouseenter", function() {
-    ctaButton.style.backgroundColor = "hsl(192, 100%, 9%)";
-    ctaButton.style.color = "white";
-});
+if (ctaButton) {
+    ctaButton.addEventListener("mouseenter", function () {
+        ctaButton.style.backgroundColor = "hsl(192, 100%, 9%)";
+        ctaButton.style.color = "white";
+    });
 
-ctaButton.addEventListener("mouseleave", function() {
-    ctaButton.style.backgroundColor = "hsl(322, 100%, 66%)";
-    ctaButton.style.color = "white";
-});
-// Initialize Firebase Auth
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-
-// Sign-Up Function
-function signUpUser() {
-    const auth = getAuth();
-    const email = document.getElementById('email').value; // Add an email input in your HTML
-    const password = document.getElementById('password').value; // Add a password input in your HTML
-
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed up successfully
-            const user = userCredential.user;
-            alert("Sign-Up Successful!");
-            console.log("User created:", user);
-        })
-        .catch((error) => {
-            // Handle Errors
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(`Error: ${errorMessage}`);
-        });
+    ctaButton.addEventListener("mouseleave", function () {
+        ctaButton.style.backgroundColor = "hsl(322, 100%, 66%)";
+        ctaButton.style.color = "white";
+    });
 }
 
-// Attach to the button
-document.querySelector('.sign-up-btn').addEventListener('click', signUpUser);
+// Firebase Auth Integration
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 
+function signUpUser() {
+    const auth = getAuth();
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+
+    if (emailInput && passwordInput) {
+        const email = emailInput.value;
+        const password = passwordInput.value;
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // User signed up successfully
+                alert("Sign-Up Successful!");
+                console.log("User created:", userCredential.user);
+                // Optionally redirect to another page
+                window.location.href = "chatroom.html";
+            })
+            .catch((error) => {
+                // Handle errors
+                const errorMessage = error.message;
+                alert(`Error: ${errorMessage}`);
+            });
+    } else {
+        alert("Please ensure email and password fields are present.");
+    }
+}
+
+// Attach sign-up functionality to the button
+const signUpBtn = document.querySelector('.sign-up-btn');
+if (signUpBtn) {
+    signUpBtn.addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent form submission if button is inside a form
+        signUpUser();
+    });
+}

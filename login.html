@@ -16,6 +16,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
 
         .container {
@@ -91,25 +92,27 @@
         </p>
     </div>
 
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js"></script>
+
     <script>
         // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyDOHnUviJtKIAtADmsgSveZ-Z-9w2VyjB0",
-  authDomain: "huddle-landing-page-506ed.firebaseapp.com",
-  projectId: "huddle-landing-page-506ed",
-  storageBucket: "huddle-landing-page-506ed.firebasestorage.app",
-  messagingSenderId: "233912433792",
-  appId: "1:233912433792:web:1e19f682d48ea89d13fa65",
-  measurementId: "G-YLPCJZEVE7"
+            authDomain: "huddle-landing-page-506ed.firebaseapp.com",
+            projectId: "huddle-landing-page-506ed",
+            storageBucket: "huddle-landing-page-506ed.appspot.com",
+            messagingSenderId: "233912433792",
+            appId: "1:233912433792:web:1e19f682d48ea89d13fa65",
+            measurementId: "G-YLPCJZEVE7"
         };
 
         // Initialize Firebase
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
 
-        // Form and elements
+        // DOM Elements
         const authForm = document.getElementById("auth-form");
         const errorMessage = document.getElementById("error-message");
         const formTitle = document.getElementById("form-title");
@@ -117,7 +120,7 @@
         const toggleForm = document.getElementById("toggle-form");
         const toggleLink = document.getElementById("toggle-link");
 
-        let isSignUp = false; // Tracks whether the user is in Sign Up mode
+        let isSignUp = false;
 
         // Toggle between Login and Sign Up
         toggleForm.addEventListener("click", (e) => {
@@ -128,36 +131,32 @@
                 formTitle.textContent = "Sign Up for Huddle";
                 formButton.textContent = "Sign Up";
                 toggleLink.textContent = "Login";
-                toggleForm.querySelector("a").textContent = "Login";
             } else {
                 formTitle.textContent = "Login to Huddle";
                 formButton.textContent = "Login";
                 toggleLink.textContent = "Sign Up";
-                toggleForm.querySelector("a").textContent = "Sign Up";
             }
         });
 
-        // Form submission
+        // Handle Form Submission
         authForm.addEventListener("submit", (e) => {
             e.preventDefault();
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
             if (isSignUp) {
-                // Sign up the user
+                // Sign up new user
                 auth.createUserWithEmailAndPassword(email, password)
-                    .then((userCredential) => {
-                        // Redirect to the chat room
+                    .then(() => {
                         window.location.href = "chatroom.html";
                     })
                     .catch((error) => {
                         errorMessage.textContent = error.message;
                     });
             } else {
-                // Log in the user
+                // Login existing user
                 auth.signInWithEmailAndPassword(email, password)
-                    .then((userCredential) => {
-                        // Redirect to the chat room
+                    .then(() => {
                         window.location.href = "chatroom.html";
                     })
                     .catch((error) => {
@@ -166,13 +165,6 @@
             }
         });
     </script>
-    <div class="login-form">
-    <input type="email" id="email" placeholder="Email" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button class="login-btn">Login</button>
-    <button class="sign-up-btn">Sign Up</button>
-</div>
-
 </body>
 
 </html>

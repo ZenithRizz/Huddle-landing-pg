@@ -59,20 +59,19 @@
             margin-bottom: 15px;
         }
 
-        .toggle {
+        .signup {
             margin-top: 15px;
             color: hsl(208, 11%, 55%);
             font-size: 0.9rem;
-            cursor: pointer;
         }
 
-        .toggle a {
+        .signup a {
             color: hsl(322, 100%, 66%);
             text-decoration: none;
             font-weight: 700;
         }
 
-        .toggle a:hover {
+        .signup a:hover {
             text-decoration: underline;
         }
     </style>
@@ -80,15 +79,15 @@
 
 <body>
     <div class="container">
-        <h1 id="form-title">Login to Huddle</h1>
-        <form id="auth-form">
+        <h1>Login to Huddle</h1>
+        <form id="login-form">
             <input type="email" id="email" placeholder="Email" required>
             <input type="password" id="password" placeholder="Password" required>
-            <button type="submit" id="form-button">Login</button>
+            <button type="submit">Login</button>
         </form>
         <p class="error" id="error-message"></p>
-        <p class="toggle" id="toggle-form">
-            Don't have an account? <a href="#" id="toggle-link">Sign Up</a>
+        <p class="signup">
+            Don't have an account? <a href="signup.html">Sign Up</a>
         </p>
     </div>
 
@@ -97,7 +96,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js"></script>
 
     <script>
-        // Firebase configuration
+        // Firebase configuration (same as in signup page)
         const firebaseConfig = {
             apiKey: "AIzaSyDOHnUviJtKIAtADmsgSveZ-Z-9w2VyjB0",
             authDomain: "huddle-landing-page-506ed.firebaseapp.com",
@@ -113,56 +112,23 @@
         const auth = firebase.auth();
 
         // DOM Elements
-        const authForm = document.getElementById("auth-form");
+        const loginForm = document.getElementById("login-form");
         const errorMessage = document.getElementById("error-message");
-        const formTitle = document.getElementById("form-title");
-        const formButton = document.getElementById("form-button");
-        const toggleForm = document.getElementById("toggle-form");
-        const toggleLink = document.getElementById("toggle-link");
 
-        let isSignUp = false;
-
-        // Toggle between Login and Sign Up
-        toggleForm.addEventListener("click", (e) => {
-            e.preventDefault();
-            isSignUp = !isSignUp;
-
-            if (isSignUp) {
-                formTitle.textContent = "Sign Up for Huddle";
-                formButton.textContent = "Sign Up";
-                toggleLink.textContent = "Login";
-            } else {
-                formTitle.textContent = "Login to Huddle";
-                formButton.textContent = "Login";
-                toggleLink.textContent = "Sign Up";
-            }
-        });
-
-        // Handle Form Submission
-        authForm.addEventListener("submit", (e) => {
+        // Handle Login Form Submission
+        loginForm.addEventListener("submit", (e) => {
             e.preventDefault();
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
-            if (isSignUp) {
-                // Sign up new user
-                auth.createUserWithEmailAndPassword(email, password)
-                    .then(() => {
-                        window.location.href = "chatroom.html";
-                    })
-                    .catch((error) => {
-                        errorMessage.textContent = error.message;
-                    });
-            } else {
-                // Login existing user
-                auth.signInWithEmailAndPassword(email, password)
-                    .then(() => {
-                        window.location.href = "chatroom.html";
-                    })
-                    .catch((error) => {
-                        errorMessage.textContent = error.message;
-                    });
-            }
+            // Login existing user
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    window.location.href = "chatroom.html"; // Redirect to chatroom after login
+                })
+                .catch((error) => {
+                    errorMessage.textContent = error.message; // Display error if login fails
+                });
         });
     </script>
 </body>

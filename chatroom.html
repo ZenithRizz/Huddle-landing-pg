@@ -7,58 +7,164 @@
     <title>Huddle Chat Room</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --neutral-dark-cyan: hsl(192, 100%, 9%);
-            --neutral-pale-cyan: hsl(193, 100%, 96%);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Open Sans', sans-serif;
-            color: var(--neutral-dark-cyan);
-            background-color: var(--neutral-pale-cyan);
-            background-image: url("bg-hero-desktop.svg"); 
+            background-image: url("bg-hero-desktop.svg");
             background-size: cover;
             background-position: center;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            padding: 20px;
+            color: hsl(192, 100%, 9%);
+        }
+
+        .container {
+            background-color: white;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #chatbox {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+
+        #chatbox p {
+            margin: 5px 0;
+        }
+
+        #message-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: hsl(322, 100%, 66%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: hsl(322, 100%, 56%);
+        }
+
+        .logout {
+            margin-top: 20px;
             text-align: center;
         }
 
-        .chatroom-container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
+        .logout button {
+            background-color: hsl(208, 11%, 55%);
         }
 
-        .chatroom-container h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .chatroom-container p {
-            font-size: 1rem;
-            line-height: 1.6;
+        .logout button:hover {
+            background-color: hsl(208, 11%, 45%);
         }
     </style>
 </head>
 
 <body>
-    <div class="chatroom-container">
-        <h1>Welcome to the Huddle Chat Room!</h1>
-        <p>This is where the magic happens! Start connecting with your community now.</p>
+    <div class="container">
+        <h1>Welcome to Huddle Chat Room</h1>
+        <div id="chatbox"></div>
+        <form id="message-form">
+            <input type="text" id="message" placeholder="Type a message..." required>
+            <button type="submit">Send</button>
+        </form>
+        <div class="logout">
+            <button id="logout-button">Log Out</button>
+        </div>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-database.js"></script>
+    <script>
+        // Firebase configuration
+  const firebaseConfig = {
+  apiKey: "AIzaSyDOHnUviJtKIAtADmsgSveZ-Z-9w2VyjB0",
+  authDomain: "huddle-landing-page-506ed.firebaseapp.com",
+  projectId: "huddle-landing-page-506ed",
+  storageBucket: "huddle-landing-page-506ed.firebasestorage.app",
+  messagingSenderId: "233912433792",
+  appId: "1:233912433792:web:1e19f682d48ea89d13fa65",
+  measurementId: "G-YLPCJZEVE7"
+};
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.database();
+
+        const chatbox = document.getElementById("chatbox");
+        const messageForm = document.getElementById("message-form");
+        const messageInput = document.getElementById("message");
+        const logoutButton = document.getElementById("logout-button");
+
+        // Authenticate and redirect if user is not logged in
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                window.location.href = "login.html";
+            } else {
+                console.log("User logged in:", user.email);
+            }
+        });
+
+        // Handle sending a message
+        messageForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const message = messageInput.value.trim();
+
+            if (message) {
+                const user = auth.currentUser;
+                db.ref("messages").push({
+                    text: message,
+                    user: user.email,
+                    timestamp: Date.now()
+                });
+                messageInput.value = "";
+            }
+        });
+
+        // Listen for new messages
+        db.ref("messages").on("child_added", (snapshot) => {
+            const message = snapshot.val();
+            const messageElement = document.createElement("p");
+            messageElement.textContent = `${message.user}: ${message.text}`;
+            chatbox.appendChild(messageElement);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        });
+
+        // Handle logout
+        logoutButton.addEventListener("click", () => {
+            auth.signOut().then(() => {
+                window.location.href = "login.html";
+            }).catch((error) => {
+                console.error("Error logging out:", error);
+            });
+        });
+    </script>
 </body>
 
 </html>

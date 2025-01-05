@@ -74,3 +74,30 @@ ctaButton.addEventListener("mouseleave", function() {
     ctaButton.style.backgroundColor = "hsl(322, 100%, 66%)";
     ctaButton.style.color = "white";
 });
+// Initialize Firebase Auth
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+
+// Sign-Up Function
+function signUpUser() {
+    const auth = getAuth();
+    const email = document.getElementById('email').value; // Add an email input in your HTML
+    const password = document.getElementById('password').value; // Add a password input in your HTML
+
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Signed up successfully
+            const user = userCredential.user;
+            alert("Sign-Up Successful!");
+            console.log("User created:", user);
+        })
+        .catch((error) => {
+            // Handle Errors
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            alert(`Error: ${errorMessage}`);
+        });
+}
+
+// Attach to the button
+document.querySelector('.sign-up-btn').addEventListener('click', signUpUser);
+
